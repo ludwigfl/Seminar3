@@ -1,4 +1,7 @@
 se/kth/iv1350/module3/integration/AccountingSystem.class
 se/kth/iv1350/module3/model/ItemList.class
+se/kth/iv1350/module3/integration/DiscountDatabase.class
 se/kth/iv1350/module3/model/Item.class
+se/kth/iv1350/module3/model/DiscountEligibility.class
 se/kth/iv1350/module3/integration/InventorySystem.class
+se/kth/iv1350/module3/model/Discount.class

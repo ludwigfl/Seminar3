@@ -5,6 +5,7 @@ package se.kth.iv1350.module3.model;
  * @author ludwigflodin
  */
 public class Item {
+    private String name;
     private double price;
     private String desc;
     private int ID;  
@@ -15,8 +16,12 @@ public class Item {
      * 
      * @param itemId 
      */
-    public Item(int itemId){
+    public Item(int itemId, double VAT, String desc, double price, String name){
         ID = itemId;
+        this.name = name;
+        this.price = price;
+        this.VAT = VAT;
+        this.desc = desc;
         quantity = 1;
     }
     

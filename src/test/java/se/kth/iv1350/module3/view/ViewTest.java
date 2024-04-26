@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import se.kth.iv1350.module3.controller.Controller;
 import se.kth.iv1350.module3.integration.InventorySystem;
+import se.kth.iv1350.module3.integration.DiscountDatabase;
 
 /**
  *
@@ -18,11 +19,13 @@ public class ViewTest {
     private ByteArrayOutputStream printoutBuffer;
     private PrintStream originalsysOut;
     private InventorySystem invSys;
+    private DiscountDatabase disSys;
     
     @BeforeEach
     public void setUp() {
         invSys = new InventorySystem();
-        Controller contr = new Controller(invSys);
+        disSys = new DiscountDatabase();
+        Controller contr = new Controller(invSys, disSys);
         instanceToTest = new View(contr);
         
         printoutBuffer = new ByteArrayOutputStream();
@@ -36,6 +39,7 @@ public class ViewTest {
         instanceToTest = null;
         printoutBuffer = null;
         invSys = null;
+        disSys = null;
         System.setOut(originalsysOut);
     }
 

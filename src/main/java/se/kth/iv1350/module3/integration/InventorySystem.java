@@ -22,7 +22,7 @@ public class InventorySystem {
      * @return 
      */
     public Item getFakeItem(int ID){
-       Item item = new Item(ID);
+       Item item = new Item(ID, 0.06, "hej svej", 59.99, "BigWheel Oatmeal");
        
        return item;
     }

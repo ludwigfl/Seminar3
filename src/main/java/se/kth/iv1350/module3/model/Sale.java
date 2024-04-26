@@ -15,6 +15,7 @@ public class Sale {
     private LocalTime saleTime;
     private LocalDate saleDate;
     private Receipt receipt;
+    private double runningTotal;
     
     /**
      * 
@@ -22,6 +23,22 @@ public class Sale {
      */
     public List<Item> getItemList(){
         return ItemList.getList();
+    }
+    
+    /**
+     * 
+     * @param price 
+     */
+    public void addToRunningTotal(double price){
+        runningTotal += price;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public double getRunningTotal(){
+        return runningTotal;
     }
     /**
      * 
