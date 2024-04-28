@@ -1,8 +1,8 @@
 package se.kth.iv1350.module3.model;
 
 /**
- *
- * @author ludwigflodin
+ *Class for specific item, a type of product in the store 
+ * @author ludwigflodin, antonHammar
  */
 public class Item {
     private String name;
@@ -13,8 +13,12 @@ public class Item {
     private int quantity;
     
     /**
-     * 
-     * @param itemId 
+     * Constructor for specific item, a type of product in the store
+     * @param itemId
+     * @param VAT
+     * @param desc
+     * @param price
+     * @param name 
      */
     public Item(int itemId, double VAT, String desc, double price, String name){
         ID = itemId;
@@ -25,23 +29,32 @@ public class Item {
         quantity = 1;
     }
     
+    /**
+     * Gets the price of the item
+     * @return the price of item
+     */
     public double getPrice(){
         return price;
     }
+    
+    /**
+     * Gets the vat of the item
+     * @return the vat of the item
+     */
     public double getVAT(){
         return VAT;
     }
     
     /**
-     * 
-     * @return 
+     * gets the id of the item
+     * @return the id of the item
      */
      public int getID(){
         return ID;
     }
      /**
-      * 
-      * @param amount 
+      * increases the quantity of the specific type of item
+      * @param amount the amount of the type of item
       */
      public void increaseQuantity(int amount){
          quantity = quantity + amount;

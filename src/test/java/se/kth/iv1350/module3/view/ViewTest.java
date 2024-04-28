@@ -7,12 +7,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import se.kth.iv1350.module3.controller.Controller;
+import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.integration.InventorySystem;
 import se.kth.iv1350.module3.integration.DiscountDatabase;
 
 /**
  *
- * @author Ludwig
+ * @author ludwigflodin, antonHammar
  */
 public class ViewTest {
     private View instanceToTest;
@@ -20,12 +21,14 @@ public class ViewTest {
     private PrintStream originalsysOut;
     private InventorySystem invSys;
     private DiscountDatabase disSys;
+    private AccountingSystem acctSys;
     
     @BeforeEach
     public void setUp() {
         invSys = new InventorySystem();
         disSys = new DiscountDatabase();
-        Controller contr = new Controller(invSys, disSys);
+        acctSys = new AccountingSystem();
+        Controller contr = new Controller(invSys, disSys, acctSys);
         instanceToTest = new View(contr);
         
         printoutBuffer = new ByteArrayOutputStream();

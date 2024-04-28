@@ -1,9 +1,11 @@
 package se.kth.iv1350.module3.integration;
+import java.util.List;
+import java.util.ArrayList;
 import se.kth.iv1350.module3.model.Item;
 
 /**
  *
- * @author ludwigflodin
+ * @author ludwigflodin, antonHammar
  */
 public class InventorySystem {
     
@@ -22,9 +24,16 @@ public class InventorySystem {
      * @return 
      */
     public Item getFakeItem(int ID){
-       Item item = new Item(ID, 0.06, "hej svej", 59.99, "BigWheel Oatmeal");
+       Item item = new Item(ID, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal");
        
        return item;
     }
     
+    /**
+     * does nothing
+     * @param itemList 
+     */
+    public void sendInformation(List<Item> itemList){
+        //best method
+    }
 }

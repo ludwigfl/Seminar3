@@ -7,21 +7,22 @@ import se.kth.iv1350.module3.integration.InventorySystem;
 import se.kth.iv1350.module3.view.View;
 
 /**
+ * The class that is created when program starts
  * @param 
- * @author Ludwig
+ * @author ludwigflodin, antonHammar
  */
 public class Main {
     
 /**
- * @param 
- * 
+ * The main method for program, calls when program starts to initialize
+ * @param args 
  */
     public static void main(String[] args){
     AccountingSystem acctSys = new AccountingSystem();
     InventorySystem invSys = new InventorySystem();
     DiscountDatabase disSys = new DiscountDatabase();
     
-    Controller contr = new Controller(invSys, disSys);
+    Controller contr = new Controller(invSys, disSys, acctSys);
     View view = new View(contr);
     
     

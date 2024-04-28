@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import se.kth.iv1350.module3.controller.Controller;
 
 /**
- *
- * @author Ludwig
+ *The class for the sale that contains the information for the sale
+ * @author ludwigflodin, antonHammar
  */
 public class Sale {
     public ItemList ItemList = new ItemList();
@@ -18,43 +18,42 @@ public class Sale {
     private double runningTotal;
     
     /**
-     * 
-     * @return 
+     * Constructor creates instance of a sale 
+     */
+    public Sale() {
+      saleTime = LocalTime.now();
+      receipt = new Receipt(saleTime, saleDate);
+    }
+    
+    /**
+     * Gets the list of items currently added to the list
+     * @return the list of items
      */
     public List<Item> getItemList(){
         return ItemList.getList();
     }
     
     /**
-     * 
-     * @param price 
+     * Adds the price of an item to the running total of the sale
+     * @param price the price of the item
      */
     public void addToRunningTotal(double price){
         runningTotal += price;
     }
     
     /**
-     * 
-     * @return 
+     * Gets the current total price
+     * @return the current total price
      */
-    public double getRunningTotal(){
+    public double calculateRunningTotal(){
         return runningTotal;
     }
+    
     /**
-     * 
-     */
-    public Sale() {
-      saleTime = LocalTime.now();
-      receipt = new Receipt(saleTime, saleDate);
-    }
-    /**
-     * 
-     * @return 
+     * Gets the receipt of the sale 
+     * @return the receipt 
      */
     public Receipt getReceipt(){
         return receipt;
     }
-    
-    
-    
 }

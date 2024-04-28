@@ -10,7 +10,7 @@ import se.kth.iv1350.module3.controller.Controller;
 
 /**
  *
- * @author Ludwig
+ * @author ludwigflodin, antonHammar
  */
 public class MainTest {
     private Main instanceToTest;

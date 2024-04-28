@@ -8,7 +8,7 @@ import se.kth.iv1350.module3.model.DiscountEligibility;
 
 /**
  *
- * @author ludwigflodin
+ * @author ludwigflodin, antonHammar
  */
 public class DiscountDatabase {
     

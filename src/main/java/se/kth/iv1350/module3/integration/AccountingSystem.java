@@ -2,13 +2,15 @@ package se.kth.iv1350.module3.integration;
 
 /**
  *
- * @author ludwigflodin
+ * @author ludwigflodin, antonHammar
  */
 public class AccountingSystem {
+    
     /**
-     * 
+     * does nothing
+     * @param payment 
      */
-    public void sendInformation(){
+    public void sendInformation(double payment){
         //best method
     }
 }
