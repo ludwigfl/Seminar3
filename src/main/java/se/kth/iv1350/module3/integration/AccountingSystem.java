@@ -12,5 +12,7 @@ public class AccountingSystem {
      */
     public void sendInformation(double payment){
         //best method
+        System.out.println("Customer pays " + payment + " SEK");
+        System.out.println("Sent sale info to external accounting system.");
     }
 }

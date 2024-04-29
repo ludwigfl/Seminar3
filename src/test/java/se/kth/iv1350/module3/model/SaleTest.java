@@ -23,7 +23,6 @@ public class SaleTest {
      private InventorySystem invSys;
      private DiscountDatabase disSys;
      private AccountingSystem acctSys;
-     private ReceiptPrinter printer;
     
     
     public SaleTest() {
@@ -34,7 +33,7 @@ public class SaleTest {
         invSys = new InventorySystem();
         disSys = new DiscountDatabase();
         acctSys = new AccountingSystem();
-        controllerToTest = new Controller(invSys, disSys, acctSys, printer);
+        controllerToTest = new Controller(invSys, disSys, acctSys);
         controllerToTest.startSale();
         itemToTest = new Item(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
 

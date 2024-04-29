@@ -24,15 +24,16 @@ public class Controller {
     
     /**
      * Constructor of controller to create instance of controller
-     * @param invSys
-     * @param disSys
-     * @param acctSys 
+     * @param invSys the inventory system
+     * @param disSys the discount system
+     * @param acctSys the accounting system
+     * @param printer the printer which prints the receipt
      */
-    public Controller(InventorySystem invSys, DiscountDatabase disSys, AccountingSystem acctSys, ReceiptPrinter printer){
+    public Controller(InventorySystem invSys, DiscountDatabase disSys, AccountingSystem acctSys){
        this.invSys = invSys;
        this.disSys = disSys;
        this.acctSys = acctSys;
-       this.printer = printer;
+       this.printer = new ReceiptPrinter();
    }
     
    /**
@@ -105,10 +106,12 @@ public class Controller {
         if(item != null){
            item.increaseQuantity(quantity); 
            sale.addToRunningTotal(item);
+           sale.addToTotalVat(item.getVAT());
         }
         else{
             item = invSys.getFakeItem(itemId, quantity);
             sale.addToRunningTotal(item);
+            sale.addToTotalVat(item.getVAT());
             sale.ItemList.addItem(item); 
         }
     }
@@ -119,6 +122,8 @@ public class Controller {
      * @param payment the amount of money customer pays for sale
      */
     public void endSale(double payment){
+        
+        System.out.println("End sale:\nTotal cost ( incl VAT ): " + sale.getTotalVat() + " SEK\n");
         
         sendSaleInformation();
         handleReceipt(payment);
@@ -131,7 +136,7 @@ public class Controller {
      */
     private void handleReceipt(double payment){
         Receipt receipt = getSale().getReceipt();
-        receipt.update(getSale().getItemList(), payment);
+        receipt.update(getSale().getItemList(), payment, sale.getTotalVat());
         printer.printReceipt(receipt);
     }
     

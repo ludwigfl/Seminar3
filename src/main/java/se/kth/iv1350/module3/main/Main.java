@@ -22,9 +22,8 @@ public class Main {
     AccountingSystem acctSys = new AccountingSystem();
     InventorySystem invSys = new InventorySystem();
     DiscountDatabase disSys = new DiscountDatabase();
-    ReceiptPrinter printer = new ReceiptPrinter();
     
-    Controller contr = new Controller(invSys, disSys, acctSys, printer);
+    Controller contr = new Controller(invSys, disSys, acctSys);
     View view = new View(contr);
     
     

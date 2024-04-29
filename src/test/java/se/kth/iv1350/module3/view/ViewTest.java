@@ -23,14 +23,13 @@ public class ViewTest {
     private InventorySystem invSys;
     private DiscountDatabase disSys;
     private AccountingSystem acctSys;
-    private ReceiptPrinter printer;
     
     @BeforeEach
     public void setUp() {
         invSys = new InventorySystem();
         disSys = new DiscountDatabase();
         acctSys = new AccountingSystem();
-        Controller contr = new Controller(invSys, disSys, acctSys, printer);
+        Controller contr = new Controller(invSys, disSys, acctSys);
         instanceToTest = new View(contr);
         
         printoutBuffer = new ByteArrayOutputStream();

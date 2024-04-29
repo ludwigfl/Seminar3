@@ -30,11 +30,43 @@ public class Item {
     }
     
     /**
+     * gets the name of the item
+     * @return name
+     */
+    public String getName(){
+        return name;
+    }
+    
+    /**
      * Gets the price of the item
      * @return the price of item
      */
     public double getPrice(){
         return price;
+    }
+    
+    /**
+     * gets the items description
+     * @return desc
+     */
+    public String getDesc(){
+        return desc;
+    }
+    
+    /**
+     * gives the total price of all items of that type
+     * @return price*quantity
+     */
+    public double getItemTotalPrice(){
+        return price*quantity;
+    }
+    
+    /**
+     * gets item price with VAT 
+     * @return price*VAT
+     */
+    public double getVatPrice(){
+        return price*VAT*quantity;
     }
     
     /**

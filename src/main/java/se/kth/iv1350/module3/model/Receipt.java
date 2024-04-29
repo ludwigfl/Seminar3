@@ -49,11 +49,12 @@ public class Receipt {
      * Updates the information in the receipt
      * @param itemList the list of items during the sale
      * @param payment the payment from the customer
+     * @param totalVAT the vat for the whole sale
      */
-    public void update(List<Item> itemList, double payment){
+    public void update(List<Item> itemList, double payment, double totalVAT){
         this.itemList = itemList;
         this.payment = payment; 
-        calculateTotalVAT();
+        this.totalVAT = totalVAT;
         calculateTotalPrice();
         calculateChange();
     }
@@ -68,11 +69,11 @@ public class Receipt {
     /**
      * calculates the total VAT based on advanced algorithm with price and vat of items
      */
-    private void calculateTotalVAT(){
+    /*private void calculateTotalVAT(){
         for(Item item : itemList){
             totalVAT += item.getVAT()*item.getPrice(); 
         }
-    }
+    }*/
     
     /**
      * calculates the total price based on advanced algorithm with price of items and old total price
@@ -81,6 +82,10 @@ public class Receipt {
         for(Item item : itemList){
             totalPrice += item.getPrice(); 
         }
+    }
+    
+    public double getTotalVatPrice(){
+        return totalPrice+totalVAT;
     }
     
     public List<Item> getItemList(){

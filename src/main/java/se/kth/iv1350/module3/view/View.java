@@ -10,7 +10,7 @@ import se.kth.iv1350.module3.model.Sale;
  */
 public class View {
      
-    private Controller contr;
+    final private Controller contr;
     
     /**
      * Constructor that creates the instance of view 
@@ -27,6 +27,7 @@ public class View {
         contr.startSale();
         System.out.println("A new sale has been started. ");
         contr.scanItem(123, 2); //123 temp itemID, 2 temp number of item
+        contr.scanItem(321, 5); //123 temp itemID, 2 temp number of item
         contr.requestDiscount(1); //1 temp customerId
         contr.endSale(420); //420 temp payment
     }

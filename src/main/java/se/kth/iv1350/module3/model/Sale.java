@@ -16,12 +16,14 @@ public class Sale {
     private LocalDate saleDate;
     private Receipt receipt;
     private double runningTotal;
+    private double runningTotalVAT;
     
     /**
      * Constructor creates instance of a sale 
      */
     public Sale() {
       saleTime = LocalTime.now();
+      saleDate = LocalDate.now();
       receipt = new Receipt(saleTime, saleDate);
     }
     
@@ -33,9 +35,17 @@ public class Sale {
         return ItemList.getList();
     }
     
+    public double getTotalVat(){
+        return runningTotalVAT;
+    }
+    
+    public void addToTotalVat(double vat){
+        runningTotalVAT += vat;
+    }
+    
     /**
      * Adds the price of an item to the running total of the sale
-     * @param price the price of the item
+     * @param item the item which price is added to running total
      */
     public void addToRunningTotal(Item item){
         runningTotal += item.getPrice() * item.getQuantity();
