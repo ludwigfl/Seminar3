@@ -30,6 +30,22 @@ public class Receipt {
     } 
     
     /**
+     * gets the local time of the sale
+     * @return time
+     */
+    public LocalTime getTime(){
+        return time;
+    }
+    
+    /**
+     * gets the local date of the sale
+     * @return date
+     */
+    public LocalDate getDate(){
+        return date;
+    }
+    
+    /**
      * Updates the information in the receipt
      * @param itemList the list of items during the sale
      * @param payment the payment from the customer

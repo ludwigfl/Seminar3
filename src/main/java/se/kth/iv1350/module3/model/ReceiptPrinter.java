@@ -11,11 +11,11 @@ public class ReceiptPrinter {
      * @param receipt the receipt with all the sale information
      */
     public void printReceipt(Receipt receipt){
-        
-        for(Item item : receipt.getItemList()){
+        //System.out.print("Time of Sale: " + receipt.getDate().toString() + "  " + receipt.getTime().toString());
+        /*for(Item item : receipt.getItemList()){
            System. item.getID()
         }
         
-        System.out.println(receipt);
+        System.out.println(receipt);*/
     }
 }
