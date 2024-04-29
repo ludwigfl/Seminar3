@@ -20,13 +20,13 @@ public class Item {
      * @param price
      * @param name 
      */
-    public Item(int itemId, double VAT, String desc, double price, String name){
+    public Item(int itemId, double VAT, String desc, double price, String name, int quantity){
         ID = itemId;
         this.name = name;
         this.price = price;
         this.VAT = VAT;
         this.desc = desc;
-        quantity = 1;
+        this.quantity = quantity;
     }
     
     /**
@@ -43,6 +43,14 @@ public class Item {
      */
     public double getVAT(){
         return VAT;
+    }
+    
+    /**
+     * Gets the quantity of an item in list 
+     * @return the amount of items
+     */
+    public int getQuantity(){
+        return quantity;
     }
     
     /**

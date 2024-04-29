@@ -8,6 +8,7 @@ import se.kth.iv1350.module3.model.Receipt;
 import se.kth.iv1350.module3.integration.DiscountDatabase;
 import se.kth.iv1350.module3.model.Discount;
 import se.kth.iv1350.module3.model.DiscountEligibility;
+import se.kth.iv1350.module3.model.ReceiptPrinter;
 
 
 /**
@@ -19,6 +20,7 @@ public class Controller {
     final private InventorySystem invSys;
     final private DiscountDatabase disSys;
     final private AccountingSystem acctSys;
+    final private ReceiptPrinter printer;
     
     /**
      * Constructor of controller to create instance of controller
@@ -26,10 +28,11 @@ public class Controller {
      * @param disSys
      * @param acctSys 
      */
-    public Controller(InventorySystem invSys, DiscountDatabase disSys, AccountingSystem acctSys){
+    public Controller(InventorySystem invSys, DiscountDatabase disSys, AccountingSystem acctSys, ReceiptPrinter printer){
        this.invSys = invSys;
        this.disSys = disSys;
        this.acctSys = acctSys;
+       this.printer = printer;
    }
     
    /**
@@ -42,7 +45,7 @@ public class Controller {
            Discount itemDiscount = disSys.getItemDiscount(sale.getItemList());
         }
         if(eligible.getTotalPriceEligiblity()){
-            Discount totalPriceDiscount = disSys.getTotalPriceDiscount(sale.calculateRunningTotal());
+            Discount totalPriceDiscount = disSys.getTotalPriceDiscount(sale.getRunningTotal());
         }
         if(eligible.getidEligiblity()){
             Discount idPriceDiscount = disSys.getCustomerDiscount(customerId);
@@ -101,22 +104,15 @@ public class Controller {
             
         if(item != null){
            item.increaseQuantity(quantity); 
-           sale.addToRunningTotal(item.getPrice());
+           sale.addToRunningTotal(item);
         }
         else{
-            item = invSys.getFakeItem(itemId);
-            sale.addToRunningTotal(item.getPrice());
+            item = invSys.getFakeItem(itemId, quantity);
+            sale.addToRunningTotal(item);
             sale.ItemList.addItem(item); 
         }
     }
     
-    /**
-     * Prints the receipt
-     * @param receipt the receipt with all the sale information
-     */
-    public void printReceipt(Receipt receipt){
-        System.out.println(receipt);
-    }
     
     /**
      * Handles all things necessary for end of sale 
@@ -136,7 +132,7 @@ public class Controller {
     private void handleReceipt(double payment){
         Receipt receipt = getSale().getReceipt();
         receipt.update(getSale().getItemList(), payment);
-        printReceipt(receipt);
+        printer.printReceipt(receipt);
     }
     
     /**
@@ -144,6 +140,6 @@ public class Controller {
      */
     private void sendSaleInformation(){
         invSys.sendInformation(sale.getItemList());
-        acctSys.sendInformation(sale.calculateRunningTotal());
+        acctSys.sendInformation(sale.getRunningTotal());
     }
 }

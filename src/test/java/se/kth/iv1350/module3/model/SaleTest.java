@@ -5,6 +5,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import se.kth.iv1350.module3.controller.Controller;
+import se.kth.iv1350.module3.integration.AccountingSystem;
+import se.kth.iv1350.module3.integration.DiscountDatabase;
+import se.kth.iv1350.module3.integration.InventorySystem;
+import se.kth.iv1350.module3.model.ReceiptPrinter;
+
 
 
 /**
@@ -12,19 +18,35 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author ludwigflodin, antonHammar
  */
 public class SaleTest {
-     Sale instanceToTest;
+     private Item itemToTest;
+     private Controller controllerToTest;
+     private InventorySystem invSys;
+     private DiscountDatabase disSys;
+     private AccountingSystem acctSys;
+     private ReceiptPrinter printer;
+    
     
     public SaleTest() {
     }
     
     @BeforeEach
     public void setUp() {
-        instanceToTest = new Sale();
+        invSys = new InventorySystem();
+        disSys = new DiscountDatabase();
+        acctSys = new AccountingSystem();
+        controllerToTest = new Controller(invSys, disSys, acctSys, printer);
+        controllerToTest.startSale();
+        itemToTest = new Item(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
+
     }
     
     @AfterEach
     public void tearDown() {
-        instanceToTest = null;
+        controllerToTest = null;
+        itemToTest = null;
+        invSys = null;
+        disSys = null;
+        acctSys = null;
     }
     
     /*
@@ -37,23 +59,27 @@ public class SaleTest {
     }
     */
     
-    /*
-    @Test
-    public void testAddToRunningTotal() {
-        double price = 0.0;
-        Sale instance = new Sale();
-        instance.addToRunningTotal(price);
-    }
-    */
     
     @Test
-    public void testCalculateRunningTotal() {
-        double expResult = 0;
-        for(Item item : instanceToTest.getItemList()){
-            expResult += item.getPrice(); 
-        double result = instanceToTest.calculateRunningTotal();
-        assertEquals(expResult, result, "Different running total values, oh no!");
-        }
+    public void testAddToRunningTotal() {
+        double expResult =2999.5;
+        controllerToTest.getSale().addToRunningTotal(itemToTest);
+         
+        double result = controllerToTest.getSale().getRunningTotal();
+        assertEquals(expResult, result, "Different running total values in addToRunningTotal, oh no!");
+
+    }
+   
+    
+    @Test
+    public void testGetRunningTotal() {
+        double expResult = 119.98;
+        controllerToTest.scanItem(123, 2);
+         
+        double result = controllerToTest.getSale().getRunningTotal();
+                
+        assertEquals(expResult, result, "Different running total values in getRunningTotal, oh no!");
+        
     }
 
     /*

@@ -23,8 +23,8 @@ public class InventorySystem {
      * @param ID
      * @return 
      */
-    public Item getFakeItem(int ID){
-       Item item = new Item(ID, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal");
+    public Item getFakeItem(int ID, int quantity){
+       Item item = new Item(ID, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", quantity);
        
        return item;
     }

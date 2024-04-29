@@ -65,5 +65,10 @@ public class Receipt {
         for(Item item : itemList){
             totalPrice += item.getPrice(); 
         }
-    } 
+    }
+    
+    public List<Item> getItemList(){
+        return itemList;
+    }
+    
 }

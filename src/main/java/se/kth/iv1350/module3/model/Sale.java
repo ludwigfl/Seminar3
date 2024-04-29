@@ -37,15 +37,15 @@ public class Sale {
      * Adds the price of an item to the running total of the sale
      * @param price the price of the item
      */
-    public void addToRunningTotal(double price){
-        runningTotal += price;
+    public void addToRunningTotal(Item item){
+        runningTotal += item.getPrice() * item.getQuantity();
     }
     
     /**
      * Gets the current total price
      * @return the current total price
      */
-    public double calculateRunningTotal(){
+    public double getRunningTotal(){
         return runningTotal;
     }
     

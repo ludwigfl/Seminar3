@@ -10,6 +10,7 @@ import se.kth.iv1350.module3.controller.Controller;
 import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.integration.InventorySystem;
 import se.kth.iv1350.module3.integration.DiscountDatabase;
+import se.kth.iv1350.module3.model.ReceiptPrinter;
 
 /**
  *
@@ -22,13 +23,14 @@ public class ViewTest {
     private InventorySystem invSys;
     private DiscountDatabase disSys;
     private AccountingSystem acctSys;
+    private ReceiptPrinter printer;
     
     @BeforeEach
     public void setUp() {
         invSys = new InventorySystem();
         disSys = new DiscountDatabase();
         acctSys = new AccountingSystem();
-        Controller contr = new Controller(invSys, disSys, acctSys);
+        Controller contr = new Controller(invSys, disSys, acctSys, printer);
         instanceToTest = new View(contr);
         
         printoutBuffer = new ByteArrayOutputStream();
@@ -43,6 +45,7 @@ public class ViewTest {
         printoutBuffer = null;
         invSys = null;
         disSys = null;
+        acctSys = null;
         System.setOut(originalsysOut);
     }
 
