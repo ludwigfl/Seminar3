@@ -36,7 +36,4 @@ public class Discount {
     public double getpercentageToBeReduced(){
         return sumToBeReduced;
     }
-    
-    
-    
 }

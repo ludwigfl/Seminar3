@@ -23,14 +23,14 @@ package se.kth.iv1350.module3.model;
     
     /**
      * Returns the item discount eligibility of a customer
-     * @return 
+     * @return the item eligibility
      */
     public boolean getItemEligiblity(){
         return itemEligibility;
     }
     /**
      * Returns the total price discount eligibility of a customer
-     * @return 
+     * @return totalPriceEligibility
      */
     public boolean getTotalPriceEligiblity(){
         return totalPriceEligibility;
@@ -38,7 +38,7 @@ package se.kth.iv1350.module3.model;
     
     /**
      * Returns the customer id discount eligibility of a customer
-     * @return 
+     * @return idEligibility
      */
     public boolean getidEligiblity(){
         return idEligibility;

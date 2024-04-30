@@ -1,7 +1,6 @@
 package se.kth.iv1350.module3.model;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalTime;
 import java.time.LocalDate;
 
@@ -67,15 +66,6 @@ public class Receipt {
     }
     
     /**
-     * calculates the total VAT based on advanced algorithm with price and vat of items
-     */
-    /*private void calculateTotalVAT(){
-        for(Item item : itemList){
-            totalVAT += item.getVAT()*item.getPrice(); 
-        }
-    }*/
-    
-    /**
      * calculates the total price based on advanced algorithm with price of items and old total price
      */
     private void calculateTotalPrice(){
@@ -84,10 +74,18 @@ public class Receipt {
         }
     }
     
+    /**
+     * gets the total price of including total vat
+     * @return total price + total vat
+     */
     public double getTotalVatPrice(){
         return totalPrice+totalVAT;
     }
     
+    /**
+     * gets the list of items 
+     * @return itemList
+     */
     public List<Item> getItemList(){
         return itemList;
     }

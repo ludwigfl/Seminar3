@@ -3,8 +3,7 @@ package se.kth.iv1350.module3.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.ArrayList;
-import se.kth.iv1350.module3.controller.Controller;
+
 
 /**
  *The class for the sale that contains the information for the sale

@@ -1,6 +1,6 @@
 package se.kth.iv1350.module3.integration;
+import static java.lang.Math.round;
 import java.util.List;
-import java.util.ArrayList;
 import se.kth.iv1350.module3.model.Item;
 
 /**
@@ -55,8 +55,8 @@ public class InventorySystem {
         System.out.println("Item description: " + item.getDesc());
         
         double vatPrice = item.getVatPrice();
-        System.out.println("Total cost ( incl VAT ): " + (item.getItemTotalPrice()+vatPrice) + " SEK");
-        System.out.println("Total VAT: " + vatPrice + " SEK\n");
+        System.out.println("Total cost ( incl VAT ): " + (round((item.getItemTotalPrice()+vatPrice)*100.0)/100.0) + " SEK");
+        System.out.println("Total VAT: " + round(vatPrice*100.0)/100.0 + " SEK\n");
         
         
     }

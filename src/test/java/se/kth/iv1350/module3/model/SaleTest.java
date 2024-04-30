@@ -1,5 +1,6 @@
 package se.kth.iv1350.module3.model;
 
+import static java.lang.Math.round;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -90,5 +91,16 @@ public class SaleTest {
         assertEquals(expResult, result);
     }
     */
+    @Test
+    public void testAddToTotalVAT() {
+        double expResult = 6.0;
+        controllerToTest.scanItem(321, 5);
+         
+        double result = round(controllerToTest.getSale().getTotalVat()*100)/100;
+                
+        assertEquals(expResult, result, "Different total VATs, oh no!");
+        
+    }
+
     
 }

@@ -14,14 +14,15 @@ public class Item {
     
     /**
      * Constructor for specific item, a type of product in the store
-     * @param itemId
-     * @param VAT
-     * @param desc
-     * @param price
-     * @param name 
+     * @param itemId the item's identifier
+     * @param VAT the item's vat 
+     * @param desc the item's description
+     * @param price the item's price 
+     * @param name the item's name
+     * @param quantity the amount of the item
      */
     public Item(int itemId, double VAT, String desc, double price, String name, int quantity){
-        ID = itemId;
+        this.ID = itemId;
         this.name = name;
         this.price = price;
         this.VAT = VAT;

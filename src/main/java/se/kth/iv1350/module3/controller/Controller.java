@@ -1,5 +1,6 @@
 package se.kth.iv1350.module3.controller;
 
+import static java.lang.Math.round;
 import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.model.Sale;
 import se.kth.iv1350.module3.model.Item;
@@ -27,7 +28,6 @@ public class Controller {
      * @param invSys the inventory system
      * @param disSys the discount system
      * @param acctSys the accounting system
-     * @param printer the printer which prints the receipt
      */
     public Controller(InventorySystem invSys, DiscountDatabase disSys, AccountingSystem acctSys){
        this.invSys = invSys;
@@ -82,17 +82,14 @@ public class Controller {
     * @param quantity The amount of a single type of item
     * @return 
     */
-    public String scanItem(int itemId, int quantity){
-        String returnMessage = "";
+    public void scanItem(int itemId, int quantity){
+       
         boolean itemExists = invSys.itemExists(itemId);
         
         if(itemExists){ 
             editItemList(quantity, itemId);
         }
-        else{
-            returnMessage = "Item does not exist";
-        }
-        return returnMessage;   
+         
     }
     
     /**
@@ -106,12 +103,12 @@ public class Controller {
         if(item != null){
            item.increaseQuantity(quantity); 
            sale.addToRunningTotal(item);
-           sale.addToTotalVat(item.getVAT());
+           sale.addToTotalVat(item.getVatPrice());
         }
         else{
             item = invSys.getFakeItem(itemId, quantity);
             sale.addToRunningTotal(item);
-            sale.addToTotalVat(item.getVAT());
+            sale.addToTotalVat(item.getVatPrice());
             sale.ItemList.addItem(item); 
         }
     }
@@ -123,7 +120,7 @@ public class Controller {
      */
     public void endSale(double payment){
         
-        System.out.println("End sale:\nTotal cost ( incl VAT ): " + sale.getTotalVat() + " SEK\n");
+        System.out.println("End sale:\nTotal cost ( incl VAT ): " + round((sale.getTotalVat() + sale.getRunningTotal())*100.0)/100.0  + " SEK\n");
         
         sendSaleInformation();
         handleReceipt(payment);
@@ -145,6 +142,6 @@ public class Controller {
      */
     private void sendSaleInformation(){
         invSys.sendInformation(sale.getItemList());
-        acctSys.sendInformation(sale.getRunningTotal());
+        acctSys.sendInformation(sale.getRunningTotal() + sale.getTotalVat());
     }
 }

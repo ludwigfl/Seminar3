@@ -1,7 +1,6 @@
 package se.kth.iv1350.module3.integration;
 
 import java.util.List;
-import java.util.ArrayList;
 import se.kth.iv1350.module3.model.Discount;
 import se.kth.iv1350.module3.model.Item;
 import se.kth.iv1350.module3.model.DiscountEligibility;

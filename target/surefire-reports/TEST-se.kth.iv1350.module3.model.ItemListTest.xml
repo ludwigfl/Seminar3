@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="se.kth.iv1350.module3.model.SaleTest" time="0.011" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="se.kth.iv1350.module3.model.ItemListTest" time="0.001" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -59,29 +59,5 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testGetRunningTotal" classname="se.kth.iv1350.module3.model.SaleTest" time="0.008">
-    <system-out><![CDATA[Add 2 item(s) with item id 123:
-Item ID: 123
-Item name: BigWheel Oatmeal
-Item cost: 59.99 SEK
-Vat: 6.0%
-Item description: Big oatmeal for the family
-Total cost ( incl VAT ): 127.18 SEK
-Total VAT: 7.2 SEK
-
-]]></system-out>
-  </testcase>
-  <testcase name="testAddToRunningTotal" classname="se.kth.iv1350.module3.model.SaleTest" time="0.0"/>
-  <testcase name="testAddToTotalVAT" classname="se.kth.iv1350.module3.model.SaleTest" time="0.0">
-    <system-out><![CDATA[Add 5 item(s) with item id 321:
-Item ID: 321
-Item name: YouGoGo Blueberry
-Item cost: 39.99 SEK
-Vat: 3.0%
-Item description: YouGoGo Blueberry for the family
-Total cost ( incl VAT ): 205.95 SEK
-Total VAT: 6.0 SEK
-
-]]></system-out>
-  </testcase>
+  <testcase name="testAddItem" classname="se.kth.iv1350.module3.model.ItemListTest" time="0.0"/>
 </testsuite>
