@@ -1,5 +1,7 @@
 package se.kth.iv1350.module3.integration;
+
 import static java.lang.Math.round;
+import java.text.DecimalFormat;
 import java.util.List;
 import se.kth.iv1350.module3.model.Item;
 
@@ -8,7 +10,7 @@ import se.kth.iv1350.module3.model.Item;
  * @author ludwigflodin, antonHammar
  */
 public class InventorySystem {
-    
+    private static final DecimalFormat decfor = new DecimalFormat("0.00"); 
     /**
      * 
      * @param itemId
@@ -51,12 +53,12 @@ public class InventorySystem {
         System.out.println("Item ID: " + item.getID());
         System.out.println("Item name: " + item.getName());
         System.out.println("Item cost: " + item.getPrice() + " SEK");
-        System.out.println("Vat: " + item.getVAT()*100 + "%");
+        System.out.println("Vat: " + item.getVAT() + "%");
         System.out.println("Item description: " + item.getDesc());
         
         double vatPrice = item.getVatPrice();
-        System.out.println("Total cost ( incl VAT ): " + (round((item.getItemTotalPrice()+vatPrice)*100.0)/100.0) + " SEK");
-        System.out.println("Total VAT: " + round(vatPrice*100.0)/100.0 + " SEK\n");
+        System.out.println("Total cost ( incl VAT ): " + (decfor.format((item.getItemTotalPrice()+vatPrice))) + " SEK");
+        System.out.println("Total VAT: " + decfor.format(vatPrice) + " SEK\n");
         
         
     }

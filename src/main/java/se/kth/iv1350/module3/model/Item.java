@@ -75,7 +75,7 @@ public class Item {
      * @return the vat of the item
      */
     public double getVAT(){
-        return VAT;
+        return VAT*100;
     }
     
     /**

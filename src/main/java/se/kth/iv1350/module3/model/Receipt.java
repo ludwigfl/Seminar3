@@ -86,7 +86,7 @@ public class Receipt {
      */
     private void calculateTotalPrice(){
         for(Item item : itemList){
-            totalPrice += item.getPrice(); 
+            totalPrice += item.getPrice()* item.getQuantity(); 
         }
     }
     
@@ -96,6 +96,14 @@ public class Receipt {
      */
     public double getTotalVatPrice(){
         return totalPrice+totalVAT;
+    }
+    
+    /**
+     * gets the total vat from receipt
+     * @return totalVAT
+     */
+    public double getTotalVat(){
+        return totalVAT;
     }
     
     /**
