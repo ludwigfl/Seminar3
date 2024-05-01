@@ -74,6 +74,14 @@ public class Receipt {
     }
     
     /**
+     * gets the change from receipt
+     * @return change
+     */
+    public double getChange(){
+        return change;
+    }
+    
+    /**
      * calculates the total price based on advanced algorithm with price of items and old total price
      */
     private void calculateTotalPrice(){

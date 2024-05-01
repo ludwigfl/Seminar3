@@ -33,9 +33,9 @@ public class ReceiptPrinter {
          System.out.println("Total: " + round(total*100.0)/100.0 + " SEK");
          System.out.println("VAT: " + round(totvat*100.0)/100.0 + " SEK");
          System.out.println("Cash: " + receipt.getPayment() + " SEK");
-         System.out.println("Change: " + round(change*100.0)/100.0 + " SEK");
+         System.out.println("Change: " + round(receipt.getChange()*100.0)/100.0 + " SEK");
          System.out.println("------------------------------------ End receipt ------------------------------------");
-         System.out.println("Change to give to customer: " + round(change*100.0)/100.0 + " SEK");
+         System.out.println("Change to give to customer: " + round(receipt.getChange()*100.0)/100.0 + " SEK");
          
     }
 }
