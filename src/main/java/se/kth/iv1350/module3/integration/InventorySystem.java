@@ -52,7 +52,7 @@ public class InventorySystem {
         System.out.println("Item ID: " + item.getID());
         System.out.println("Item name: " + item.getName());
         System.out.println("Item cost: " + item.getPrice() + " SEK");
-        System.out.println("Vat: " + item.getVAT() + "%");
+        System.out.println("Vat: " + item.getVatForPrintOut()+ "%");
         System.out.println("Item description: " + item.getDesc());
         
         double vatPrice = item.getVatPrice();

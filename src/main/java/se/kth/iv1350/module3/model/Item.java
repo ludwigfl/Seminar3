@@ -75,6 +75,14 @@ public class Item {
      * @return the vat of the item
      */
     public double getVAT(){
+        return VAT;
+    }
+    
+    /**
+     * get vat of item in integer value, only used for formatting purposes
+     * @return vat*100
+     */
+    public double getVatForPrintOut(){
         return VAT*100;
     }
     
