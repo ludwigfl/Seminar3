@@ -1,6 +1,7 @@
 package se.kth.iv1350.module3.controller;
 
 import static java.lang.Math.round;
+import java.text.DecimalFormat;
 import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.model.Sale;
 import se.kth.iv1350.module3.model.Item;
@@ -17,6 +18,7 @@ import se.kth.iv1350.module3.model.ReceiptPrinter;
  * @author ludwigflodin, antonHammar
  */
 public class Controller {
+    private static final DecimalFormat decfor = new DecimalFormat("0.00");
     private Sale sale;
     final private InventorySystem invSys;
     final private DiscountDatabase disSys;
@@ -120,7 +122,7 @@ public class Controller {
      */
     public void endSale(double payment){
         
-        System.out.println("End sale:\nTotal cost ( incl VAT ): " + round((sale.getTotalVat() + sale.getRunningTotal())*100.0)/100.0  + " SEK\n");
+        System.out.println("End sale:\nTotal cost ( incl VAT ): " + decfor.format((sale.getTotalVat() + sale.getRunningTotal()))  + " SEK\n");
         
         sendSaleInformation();
         handleReceipt(payment);

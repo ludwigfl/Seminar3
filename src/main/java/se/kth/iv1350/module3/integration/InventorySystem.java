@@ -1,6 +1,5 @@
 package se.kth.iv1350.module3.integration;
 
-import static java.lang.Math.round;
 import java.text.DecimalFormat;
 import java.util.List;
 import se.kth.iv1350.module3.model.Item;
@@ -10,7 +9,7 @@ import se.kth.iv1350.module3.model.Item;
  * @author ludwigflodin, antonHammar
  */
 public class InventorySystem {
-    private static final DecimalFormat decfor = new DecimalFormat("0.00"); 
+    private static final DecimalFormat decfor = new DecimalFormat("0.00");
     /**
      * 
      * @param itemId
