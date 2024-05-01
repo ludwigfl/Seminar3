@@ -37,6 +37,14 @@ public class Receipt {
     }
     
     /**
+     * gets the payment from receipt
+     * @return payment
+     */
+    public double getPayment(){
+        return payment;
+    }
+    
+    /**
      * gets the local date of the sale
      * @return date
      */

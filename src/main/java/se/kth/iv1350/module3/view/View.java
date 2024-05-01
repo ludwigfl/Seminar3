@@ -27,7 +27,7 @@ public class View {
         contr.scanItem(123, 2); //123 temp itemID, 2 temp number of item
         contr.scanItem(321, 5); //123 temp itemID, 2 temp number of item
         contr.requestDiscount(1); //1 temp customerId
-        contr.endSale(420); //420 temp payment
+        contr.endSale(400); //420 temp payment
     }
     
     
