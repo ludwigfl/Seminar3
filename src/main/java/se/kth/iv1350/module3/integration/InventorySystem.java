@@ -1,6 +1,5 @@
 package se.kth.iv1350.module3.integration;
 
-import java.text.DecimalFormat;
 import java.util.List;
 import se.kth.iv1350.module3.model.Item;
 
@@ -9,7 +8,7 @@ import se.kth.iv1350.module3.model.Item;
  * @author ludwigflodin, antonHammar
  */
 public class InventorySystem {
-    private static final DecimalFormat decfor = new DecimalFormat("0.00");
+    
     /**
      * 
      * @param itemId
@@ -34,7 +33,6 @@ public class InventorySystem {
            item = new Item(ID, 0.03, "YouGoGo Blueberry for the family", 39.99, "YouGoGo Blueberry", quantity);
         }
         
-       printItemInfo(item);
        return item;
     }
     
@@ -44,21 +42,5 @@ public class InventorySystem {
      */
     public void sendInformation(List<Item> itemList){
         //best method
-        System.out.println("Told external inventory system to decrease inventory quantity of items");
-    }
-    
-    private void printItemInfo(Item item){
-        System.out.println("Add " + item.getQuantity() + " item(s) with item id " + item.getID() + ":");
-        System.out.println("Item ID: " + item.getID());
-        System.out.println("Item name: " + item.getName());
-        System.out.println("Item cost: " + item.getPrice() + " SEK");
-        System.out.println("Vat: " + item.getVatForPrintOut()+ "%");
-        System.out.println("Item description: " + item.getDesc());
-        
-        double vatPrice = item.getVatPrice();
-        System.out.println("Total cost ( incl VAT ): " + (decfor.format((item.getItemTotalPrice()+vatPrice))) + " SEK");
-        System.out.println("Total VAT: " + decfor.format(vatPrice) + " SEK\n");
-        
-        
     }
 }

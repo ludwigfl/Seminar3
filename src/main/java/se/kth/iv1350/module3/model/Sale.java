@@ -2,7 +2,7 @@ package se.kth.iv1350.module3.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+import se.kth.iv1350.module3.integration.InventorySystem;
 
 
 /**
@@ -14,30 +14,70 @@ public class Sale {
     private LocalTime saleTime;
     private LocalDate saleDate;
     private Receipt receipt;
+    private SaleDTO saleInfo;
     private double runningTotal;
     private double runningTotalVAT;
+    final private InventorySystem invSys;
     
     /**
-     * Constructor creates instance of a sale 
+     * Constructor for sale 
+     * @param invSys 
      */
-    public Sale() {
+    public Sale(InventorySystem invSys) {
       saleTime = LocalTime.now();
       saleDate = LocalDate.now();
       receipt = new Receipt(saleTime, saleDate);
+      this.invSys = invSys;
+    }
+    
+     /**
+     * Adds item or quantity of specific item type to list
+     * @param quantity The amount of a single type of item
+     * @param itemId The items identifier
+     */
+    public void editItemList(int quantity, int itemId){
+        Item item = ItemList.getItem(itemId); 
+            
+        if(item != null){
+           item.increaseQuantity(quantity); 
+           addToRunningTotal(item);
+           addToTotalVat(item.getVatPrice());
+        }
+        else{
+            item = invSys.getFakeItem(itemId, quantity);
+            addToRunningTotal(item);
+            addToTotalVat(item.getVatPrice());
+            ItemList.addItem(item); 
+        }
     }
     
     /**
-     * Gets the list of items currently added to the list
-     * @return the list of items
+     * creates the saleDTO at the end of the sale
      */
-    public List<Item> getItemList(){
-        return ItemList.getList();
+    public void createSaleDTO(){
+        this.saleInfo = new SaleDTO(this.ItemList, this.saleTime, this.saleDate, this.runningTotal, this.runningTotalVAT);
     }
     
+    /**
+     * gets the sale information through DTO 
+     * @return saleInfo
+     */
+    public SaleDTO getSaleInfo(){
+        return saleInfo;
+    }
+    
+    /**
+     * gets the total VAT 
+     * @return running total vat
+     */
     public double getTotalVat(){
         return runningTotalVAT;
     }
     
+    /**
+     * adds to the total vat 
+     * @param vat the vat of the item
+     */
     public void addToTotalVat(double vat){
         runningTotalVAT += vat;
     }

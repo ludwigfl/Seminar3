@@ -30,7 +30,7 @@ public class ReceiptPrinter {
          System.out.println("Cash: " + receipt.getPayment() + " SEK");
          System.out.println("Change: " + decfor.format(receipt.getChange()) + " SEK");
          System.out.println("------------------------------------ End receipt ------------------------------------");
-         System.out.println("Change to give to customer: " + decfor.format(receipt.getChange()) + " SEK");
+         System.out.println("Change to give to customer: " + decfor.format(receipt.getChange()) + " SEK\n");
          
     }
 }

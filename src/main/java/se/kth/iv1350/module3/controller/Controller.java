@@ -1,16 +1,12 @@
 package se.kth.iv1350.module3.controller;
 
-import static java.lang.Math.round;
-import java.text.DecimalFormat;
 import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.model.Sale;
-import se.kth.iv1350.module3.model.Item;
 import se.kth.iv1350.module3.integration.InventorySystem;
 import se.kth.iv1350.module3.model.Receipt;
 import se.kth.iv1350.module3.integration.DiscountDatabase;
-import se.kth.iv1350.module3.model.Discount;
-import se.kth.iv1350.module3.model.DiscountEligibility;
 import se.kth.iv1350.module3.model.ReceiptPrinter;
+import se.kth.iv1350.module3.model.SaleDTO;
 
 
 /**
@@ -18,7 +14,6 @@ import se.kth.iv1350.module3.model.ReceiptPrinter;
  * @author ludwigflodin, antonHammar
  */
 public class Controller {
-    private static final DecimalFormat decfor = new DecimalFormat("0.00");
     private Sale sale;
     final private InventorySystem invSys;
     final private DiscountDatabase disSys;
@@ -38,36 +33,19 @@ public class Controller {
        this.printer = new ReceiptPrinter();
    }
     
-   /**
-    * Handle the 3 different discounts ( ͡° ͜ʖ ͡°)
-    * @param customerId identifier of the customer
-    */
-    public void handleDiscount(int customerId){
-        DiscountEligibility eligible = disSys.checkEligibility(customerId);
-        if(eligible.getItemEligiblity()){
-           Discount itemDiscount = disSys.getItemDiscount(sale.getItemList());
-        }
-        if(eligible.getTotalPriceEligiblity()){
-            Discount totalPriceDiscount = disSys.getTotalPriceDiscount(sale.getRunningTotal());
-        }
-        if(eligible.getidEligiblity()){
-            Discount idPriceDiscount = disSys.getCustomerDiscount(customerId);
-        }  
-    }
-    
     /**
-     * Request the discount from view
+     * Request the discount from the discount database
      * @param customerId identifier of the customer
      */
     public void requestDiscount(int customerId){
-        handleDiscount(customerId);
+        disSys.getDiscount(customerId);
     }
     
     /**
      * Creates sale object
      */
    public void startSale(){
-       sale = new Sale();
+       sale = new Sale(invSys);
    }
    
    /**
@@ -82,36 +60,13 @@ public class Controller {
     * Responsible for scanning item checks for item
     * @param itemId The items identifier
     * @param quantity The amount of a single type of item
-    * @return 
     */
     public void scanItem(int itemId, int quantity){
        
         boolean itemExists = invSys.itemExists(itemId);
         
         if(itemExists){ 
-            editItemList(quantity, itemId);
-        }
-         
-    }
-    
-    /**
-     * Adds item or quantity of specific item type to list
-     * @param quantity The amount of a single type of item
-     * @param itemId The items identifier
-     */
-    private void editItemList(int quantity, int itemId){
-        Item item = sale.ItemList.getItem(itemId); 
-            
-        if(item != null){
-           item.increaseQuantity(quantity); 
-           sale.addToRunningTotal(item);
-           sale.addToTotalVat(item.getVatPrice());
-        }
-        else{
-            item = invSys.getFakeItem(itemId, quantity);
-            sale.addToRunningTotal(item);
-            sale.addToTotalVat(item.getVatPrice());
-            sale.ItemList.addItem(item); 
+            sale.editItemList(quantity, itemId);
         }
     }
     
@@ -119,14 +74,15 @@ public class Controller {
     /**
      * Handles all things necessary for end of sale 
      * @param payment the amount of money customer pays for sale
+     * @return SaleInfo DTO
      */
-    public void endSale(double payment){
-        
-        System.out.println("End sale:\nTotal cost ( incl VAT ): " + decfor.format((sale.getTotalVat() + sale.getRunningTotal()))  + " SEK\n");
-        
+    public SaleDTO endSale(double payment){
+                
+        sale.createSaleDTO();
         sendSaleInformation();
         handleReceipt(payment);
         
+        return sale.getSaleInfo();
     }
     
     /**
@@ -135,15 +91,15 @@ public class Controller {
      */
     private void handleReceipt(double payment){
         Receipt receipt = getSale().getReceipt();
-        receipt.update(getSale().getItemList(), payment, sale.getTotalVat());
+        receipt.update(sale.getSaleInfo().getitemList().getList(), payment, sale.getTotalVat());
         printer.printReceipt(receipt);
     }
     
     /**
      * Sends information of sale to external inventory and accounting system
      */
-    private void sendSaleInformation(){
-        invSys.sendInformation(sale.getItemList());
-        acctSys.sendInformation(sale.getRunningTotal() + sale.getTotalVat());
+    private void sendSaleInformation(){    
+        invSys.sendInformation(sale.getSaleInfo().getitemList().getList());
+        acctSys.sendInformation(sale.getRunningTotal() + sale.getTotalVat()); //fix with dto later
     }
 }

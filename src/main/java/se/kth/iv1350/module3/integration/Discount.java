@@ -1,4 +1,4 @@
-package se.kth.iv1350.module3.model;
+package se.kth.iv1350.module3.integration;
 
 /**
  * The discount class which contains for discounts
@@ -37,3 +37,4 @@ public class Discount {
         return sumToBeReduced;
     }
 }
+
