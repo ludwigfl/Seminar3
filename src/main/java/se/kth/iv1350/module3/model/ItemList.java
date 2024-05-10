@@ -37,4 +37,26 @@ public class ItemList {
     public List<Item> getList(){
         return listOfItems;
     }
+    
+    /**
+     * increase the quantity of the specific item that is looked for 
+     * @param item the item that is looked for
+     */
+    public void increaseQuantityOfItem(Item item){
+        for(Item itemInList : listOfItems){
+            if(itemInList.getID() == item.getID()){
+                itemInList.increaseQuantity(item.getQuantity());
+           }
+        }
+    }
+    
+    /**
+     * checks if item exists in list
+     * @param item the item which is looked for
+     * @return true if exists, false if not exists
+     */
+    public boolean checkforId(Item item){
+        item = getItem(item.getID());
+        return item != null; 
+    }
 }

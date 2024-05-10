@@ -2,7 +2,6 @@ package se.kth.iv1350.module3.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import se.kth.iv1350.module3.integration.InventorySystem;
 
 
 /**
@@ -10,44 +9,41 @@ import se.kth.iv1350.module3.integration.InventorySystem;
  * @author ludwigflodin, antonHammar
  */
 public class Sale {
-    public ItemList ItemList = new ItemList();
+    public ItemList itemList = new ItemList();
     private LocalTime saleTime;
     private LocalDate saleDate;
     private Receipt receipt;
     private SaleDTO saleInfo;
     private double runningTotal;
     private double runningTotalVAT;
-    final private InventorySystem invSys;
+    
     
     /**
      * Constructor for sale 
-     * @param invSys 
      */
-    public Sale(InventorySystem invSys) {
+    public Sale() {
       saleTime = LocalTime.now();
       saleDate = LocalDate.now();
       receipt = new Receipt(saleTime, saleDate);
-      this.invSys = invSys;
     }
     
      /**
      * Adds item or quantity of specific item type to list
-     * @param quantity The amount of a single type of item
-     * @param itemId The items identifier
+     * @param item The item that is looked for 
      */
-    public void editItemList(int quantity, int itemId){
-        Item item = ItemList.getItem(itemId); 
-            
-        if(item != null){
-           item.increaseQuantity(quantity); 
-           addToRunningTotal(item);
-           addToTotalVat(item.getVatPrice());
-        }
-        else{
-            item = invSys.getFakeItem(itemId, quantity);
-            addToRunningTotal(item);
-            addToTotalVat(item.getVatPrice());
-            ItemList.addItem(item); 
+    public void editItemList(Item item){ 
+        if(item.getQuantity() > 0){
+            if(itemList.checkforId(item)){
+               itemList.increaseQuantityOfItem(item);
+               addToRunningTotal(item);
+               addToTotalVat(item.getVatPrice());
+            }
+            else{
+
+                addToRunningTotal(item);
+                addToTotalVat(item.getVatPrice());
+                itemList.addItem(item); 
+            }
         }
     }
     
@@ -55,7 +51,7 @@ public class Sale {
      * creates the saleDTO at the end of the sale
      */
     public void createSaleDTO(){
-        this.saleInfo = new SaleDTO(this.ItemList, this.saleTime, this.saleDate, this.runningTotal, this.runningTotalVAT);
+        this.saleInfo = new SaleDTO(this.itemList, this.saleTime, this.saleDate, this.runningTotal, this.runningTotalVAT);
     }
     
     /**
@@ -104,5 +100,13 @@ public class Sale {
      */
     public Receipt getReceipt(){
         return receipt;
+    }
+    
+    /**
+     * getter for the total price with vat applied
+     * @return runningTotal RunningTotalVAT
+     */
+    public double getTotalWithVat(){
+        return runningTotal + runningTotalVAT;
     }
 }
