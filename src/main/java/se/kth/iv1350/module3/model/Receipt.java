@@ -70,7 +70,7 @@ public class Receipt {
      * Calculates the change based on advanced algorithm with payment and total price
      */
     private void calculateChange(){
-        change = payment - totalPrice;
+        change = payment - totalPrice-totalVAT;
     }
     
     /**

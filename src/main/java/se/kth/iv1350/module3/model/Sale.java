@@ -49,9 +49,10 @@ public class Sale {
     
     /**
      * creates the saleDTO at the end of the sale
+     * @param payment the customers payment
      */
-    public void createSaleDTO(){
-        this.saleInfo = new SaleDTO(this.itemList, this.saleTime, this.saleDate, this.runningTotal, this.runningTotalVAT);
+    public void createSaleDTO(double payment){
+        this.saleInfo = new SaleDTO(itemList, saleTime, saleDate, runningTotal, runningTotalVAT, payment);
     }
     
     /**

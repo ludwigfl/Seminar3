@@ -61,10 +61,12 @@ public class Controller {
     * Responsible for scanning item checks for item
     * @param itemId The items identifier
     * @param quantity The amount of a single type of item
+    * @return the item in question
     */
-    public void scanItem(int itemId, int quantity){
+    public Item scanItem(int itemId, int quantity){
         Item item = invSys.getFakeItem(itemId, quantity);
         sale.editItemList(item);
+        return item;
     }
     
     
@@ -75,7 +77,7 @@ public class Controller {
      */
     public SaleDTO endSale(double payment){
                 
-        sale.createSaleDTO();
+        sale.createSaleDTO(payment);
         sendSaleInformation();
         handleReceipt(payment);
         
