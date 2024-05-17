@@ -1,7 +1,6 @@
 package se.kth.iv1350.module3.model;
 
 import static java.lang.Math.round;
-import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import se.kth.iv1350.module3.controller.Controller;
 import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.integration.DiscountDatabase;
 import se.kth.iv1350.module3.integration.InventorySystem;
-import se.kth.iv1350.module3.model.ReceiptPrinter;
 
 
 
@@ -74,7 +72,7 @@ public class SaleTest {
     @Test
     public void testGetRunningTotal() {
         double expResult = 119.98;
-        controllerToTest.scanItem(123, 2);
+        Item item = controllerToTest.scanItem(123, 2);
          
         double result = controllerToTest.getSale().getRunningTotal();
                 
@@ -94,7 +92,7 @@ public class SaleTest {
     @Test
     public void testAddToTotalVAT() {
         double expResult = 6.0;
-        controllerToTest.scanItem(321, 5);
+        Item item = controllerToTest.scanItem(321, 5);
          
         double result = round(controllerToTest.getSale().getTotalVat()*100)/100;
                 

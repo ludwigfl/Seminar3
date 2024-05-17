@@ -54,18 +54,7 @@ public class SaleDTO {
         return totalVAT;
     }
     
-    /**
-     * formats the end sale info to a string
-     * @return the string for printout of the end sale info
-     */
-    @Override
-    public String toString(){
-        DecimalFormat decfor = new DecimalFormat("0.00");
-        return 
-        "End sale:"
-        +"\nTotal cost ( incl VAT ): " + decfor.format(total + totalVAT)  + " SEK"
-        +"\nCustomer pays " + decfor.format(payment) + " SEK"
-        +"\nTold external inventory system to decrease inventory quantity of items"
-        +"\nSent sale info to external accounting system.";
+    public double getPayment(){
+        return payment;
     }
 }
