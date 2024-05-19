@@ -54,6 +54,10 @@ public class SaleDTO {
         return totalVAT;
     }
     
+    /**
+     * getter for the payment
+     * @return payment
+     */
     public double getPayment(){
         return payment;
     }
