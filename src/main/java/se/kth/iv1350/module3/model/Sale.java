@@ -27,11 +27,17 @@ public class Sale {
       receipt = new Receipt(saleTime, saleDate);
     }
     
+    public Item createListItem(ItemDTO itemDTO){
+        Item item = new Item(itemDTO);
+        return item;
+    }
+    
      /**
      * Adds item or quantity of specific item type to list
-     * @param item The item that is looked for 
+     * @param itemDTO The item that is looked for 
      */
-    public void editItemList(Item item){ 
+    public void editItemList(ItemDTO itemDTO){ 
+         Item item = createListItem(itemDTO); 
         if(item.getQuantity() > 0){
             if(itemList.checkforId(item)){
                itemList.increaseQuantityOfItem(item);
@@ -99,8 +105,12 @@ public class Sale {
      * Gets the receipt of the sale 
      * @return the receipt 
      */
-    public Receipt getReceipt(){
-        return receipt;
+    public ReceiptDTO getReceiptDTO(){
+        return new ReceiptDTO(receipt);
+    }
+    
+    public void updateReceipt(double payment){
+        receipt.update(saleInfo.getitemList().getList(), payment, runningTotalVAT);
     }
     
     /**

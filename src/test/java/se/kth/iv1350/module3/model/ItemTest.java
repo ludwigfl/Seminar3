@@ -19,6 +19,7 @@ import se.kth.iv1350.module3.model.ReceiptPrinter;
  * @author ludwigflodin, antonHammar
  */
 public class ItemTest {
+     private ItemDTO itemDTO;
      private Item itemToTest;
     
     
@@ -27,7 +28,8 @@ public class ItemTest {
     
     @BeforeEach
     public void setUp() {
-        itemToTest = new Item(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
+        itemDTO = new ItemDTO(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
+        itemToTest = new Item(itemDTO);
 
     }
     
@@ -35,6 +37,7 @@ public class ItemTest {
     public void tearDown() {
        
         itemToTest = null;
+        itemDTO = null;
        
     }
 
@@ -85,7 +88,6 @@ public class ItemTest {
     
     @Test
     public void testIncreaseQuantity() {
-        
         int expResult = 52;
         int result;
         itemToTest.increaseQuantity(2);

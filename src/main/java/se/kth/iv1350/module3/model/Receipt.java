@@ -82,6 +82,14 @@ public class Receipt {
     }
     
     /**
+     * returns the total price of the sale
+     * @return price
+     */
+    public double getTotalPrice(){
+        return totalPrice;
+    }
+    
+    /**
      * calculates the total price based on advanced algorithm with price of items and old total price
      */
     private void calculateTotalPrice(){

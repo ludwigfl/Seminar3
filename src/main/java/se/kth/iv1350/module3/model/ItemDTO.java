@@ -1,11 +1,11 @@
 package se.kth.iv1350.module3.model;
-import java.text.DecimalFormat;
 
 /**
- *Class for specific item, a type of product in the store 
- * @author ludwigflodin, antonHammar
+ *
+ * @author ludwigflodin, antonhammar
  */
-public class Item {
+public class ItemDTO {
+    
     private String name;
     private double price;
     private String desc;
@@ -22,13 +22,13 @@ public class Item {
      * @param name the item's name
      * @param quantity the amount of the item
      */
-    public Item(ItemDTO itemDTO){
-        this.ID = itemDTO.getID();
-        this.name = itemDTO.getName();
-        this.price = itemDTO.getPrice();
-        this.VAT = itemDTO.getVAT();
-        this.desc = itemDTO.getDesc();
-        this.quantity = itemDTO.getQuantity();
+    public ItemDTO(int itemId, double VAT, String desc, double price, String name, int quantity){
+        this.ID = itemId;
+        this.name = name;
+        this.price = price;
+        this.VAT = VAT;
+        this.desc = desc;
+        this.quantity = quantity;
     }
     
     /**
@@ -56,36 +56,13 @@ public class Item {
     }
     
     /**
-     * gives the total price of all items of that type
-     * @return price*quantity
-     */
-    public double getItemTotalPrice(){
-        return price*quantity;
-    }
-    
-    /**
-     * gets item price with VAT 
-     * @return price*VAT
-     */
-    public double getVatPrice(){
-        return price*VAT*quantity;
-    }
-    
-    /**
      * Gets the vat of the item
      * @return the vat of the item
      */
     public double getVAT(){
         return VAT;
     }
-    
-    /**
-     * get vat of item in integer value, only used for formatting purposes
-     * @return vat*100
-     */
-    public double getVatForPrintOut(){
-        return VAT*100;
-    }
+   
     
     /**
      * Gets the quantity of an item in list 
@@ -102,11 +79,6 @@ public class Item {
      public int getID(){
         return ID;
     }
-     /**
-      * increases the quantity of the specific type of item
-      * @param amount the amount of the type of item
-      */
-     public void increaseQuantity(int amount){
-         quantity = quantity + amount;
-     }  
+
 }
+

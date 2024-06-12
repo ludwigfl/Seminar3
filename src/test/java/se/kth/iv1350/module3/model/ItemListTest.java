@@ -20,9 +20,10 @@ import se.kth.iv1350.module3.model.ReceiptPrinter;
  * @author ludwigflodin, antonHammar
  */
 public class ItemListTest {
-     private Item itemToTest;
+     private ItemDTO itemDTO;
      private List<Item> expectedList;
      private ItemList resultList;
+     private Item itemToTest;
     
     
     public ItemListTest() {
@@ -30,9 +31,10 @@ public class ItemListTest {
     
     @BeforeEach
     public void setUp() {
-        itemToTest = new Item(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
+        itemDTO = new ItemDTO(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
         expectedList = new ArrayList<>(); 
         resultList = new ItemList();
+        itemToTest = new Item(itemDTO);
         
 
     }
@@ -40,10 +42,10 @@ public class ItemListTest {
     @AfterEach
     public void tearDown() {
        
-        itemToTest = null;
+        itemDTO = null;
         expectedList = null;
         resultList = null;
-                
+        itemToTest = null;
         
        
     }
@@ -62,6 +64,7 @@ public class ItemListTest {
     
     @Test
     public void testAddItem() {
+        
         expectedList.add(itemToTest);
         List<Item> expResult = expectedList;
         resultList.addItem(itemToTest);

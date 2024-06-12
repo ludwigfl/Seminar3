@@ -3,9 +3,8 @@ package se.kth.iv1350.module3.controller;
 import se.kth.iv1350.module3.integration.AccountingSystem;
 import se.kth.iv1350.module3.model.Sale;
 import se.kth.iv1350.module3.integration.InventorySystem;
-import se.kth.iv1350.module3.model.Receipt;
 import se.kth.iv1350.module3.integration.DiscountDatabase;
-import se.kth.iv1350.module3.model.Item;
+import se.kth.iv1350.module3.model.ItemDTO;
 import se.kth.iv1350.module3.model.ReceiptPrinter;
 import se.kth.iv1350.module3.model.SaleDTO;
 
@@ -48,14 +47,6 @@ public class Controller {
    public void startSale(){
        sale = new Sale();
    }
-   
-   /**
-    * Gets the sale object
-    * @return the sale
-    */
-   public Sale getSale(){
-       return sale;
-   }
 
    /**
     * Responsible for scanning item checks for item
@@ -63,10 +54,10 @@ public class Controller {
     * @param quantity The amount of a single type of item
     * @return the item in question
     */
-    public Item scanItem(int itemId, int quantity){
-        Item item = invSys.getFakeItem(itemId, quantity);
-        sale.editItemList(item);
-        return item;
+    public ItemDTO scanItem(int itemId, int quantity){
+        ItemDTO itemDTO = invSys.getFakeItem(itemId, quantity);
+        sale.editItemList(itemDTO);
+        return itemDTO;
     }
     
     
@@ -89,9 +80,8 @@ public class Controller {
      * @param payment the amount of money customer pays for sale
      */
     private void handleReceipt(double payment){
-        Receipt receipt = getSale().getReceipt();
-        receipt.update(sale.getSaleInfo().getitemList().getList(), payment, sale.getTotalVat());
-        printer.printReceipt(receipt);
+        sale.updateReceipt(payment);
+        printer.printReceipt(sale.getReceiptDTO());
     }
     
     /**

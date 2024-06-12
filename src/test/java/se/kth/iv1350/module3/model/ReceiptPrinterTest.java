@@ -30,6 +30,7 @@ public class ReceiptPrinterTest {
     private ReceiptPrinter instancePrinter;
     private Receipt fakeReceipt;
     private ItemList fakeList;
+    private ReceiptDTO fakeReceipt2;
     
     
     
@@ -40,6 +41,7 @@ public class ReceiptPrinterTest {
         fakeReceipt = new Receipt(LocalTime.now(), LocalDate.now());
         List <Item> fakeList = new ArrayList();
         fakeReceipt.update(fakeList, 0, 0);
+        fakeReceipt2 = new ReceiptDTO(fakeReceipt);
         printoutBuffer = new ByteArrayOutputStream();
         PrintStream inMemSysOut = new PrintStream(printoutBuffer);
         originalsysOut = System.out;
@@ -52,7 +54,9 @@ public class ReceiptPrinterTest {
         printoutBuffer = null;
         instancePrinter = null;
         fakeReceipt = null;
+        fakeReceipt2 = null;
         fakeList = null;
+        
         
         System.setOut(originalsysOut);
     }
@@ -60,7 +64,7 @@ public class ReceiptPrinterTest {
     @Test
     public void testPrintReceipt() {
         
-        instancePrinter.printReceipt(fakeReceipt);
+        instancePrinter.printReceipt(fakeReceipt2);
         String printout = printoutBuffer.toString();
         String expectedOutput = "------------------------------------ Begin receipt ------------------------------------";
         assertTrue(printout.contains(expectedOutput), "wrong receipt printout");

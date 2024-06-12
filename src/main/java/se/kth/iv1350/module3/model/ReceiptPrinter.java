@@ -14,7 +14,7 @@ public class ReceiptPrinter {
      * Prints the receipt
      * @param receipt the receipt with all the sale information
      */
-    public void printReceipt(Receipt receipt){
+    public void printReceipt(ReceiptDTO receipt){
         LocalTime time = receipt.getTime();
         time = time.plusMinutes(1).minusNanos(1).withSecond(0).withNano(0);
         
@@ -25,7 +25,7 @@ public class ReceiptPrinter {
            System.out.println(item.getName() + "        " + item.getQuantity() + " x " + item.getPrice() + "   " + decfor.format(item.getItemTotalPrice()) + " SEK");
         }
         
-         System.out.println("Total: " + decfor.format(receipt.getTotalVatPrice()) + " SEK");
+         System.out.println("Total: " + decfor.format(receipt.getTotalPrice()+receipt.getTotalVat()) + " SEK");
          System.out.println("VAT: " + decfor.format(receipt.getTotalVat()) + " SEK");
          System.out.println("Cash: " + receipt.getPayment() + " SEK");
          System.out.println("Change: " + decfor.format(receipt.getChange()) + " SEK");

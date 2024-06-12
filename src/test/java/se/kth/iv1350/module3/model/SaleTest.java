@@ -17,11 +17,14 @@ import se.kth.iv1350.module3.integration.InventorySystem;
  * @author ludwigflodin, antonHammar
  */
 public class SaleTest {
+     private ItemDTO item1;
+     
      private Item itemToTest;
      private Controller controllerToTest;
      private InventorySystem invSys;
      private DiscountDatabase disSys;
      private AccountingSystem acctSys;
+     private Sale sale;
     
     
     public SaleTest() {
@@ -34,7 +37,10 @@ public class SaleTest {
         acctSys = new AccountingSystem();
         controllerToTest = new Controller(invSys, disSys, acctSys);
         controllerToTest.startSale();
-        itemToTest = new Item(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50);
+        sale = new Sale();
+        item1 = new ItemDTO(123, 0.06, "Big oatmeal for the family", 59.99, "BigWheel Oatmeal", 50); 
+        itemToTest = new Item(item1);
+        
 
     }
     
@@ -45,6 +51,7 @@ public class SaleTest {
         invSys = null;
         disSys = null;
         acctSys = null;
+        item1 = null;
     }
     
     /*
@@ -61,40 +68,21 @@ public class SaleTest {
     @Test
     public void testAddToRunningTotal() {
         double expResult =2999.5;
-        controllerToTest.getSale().addToRunningTotal(itemToTest);
+        sale.addToRunningTotal(itemToTest);
          
-        double result = controllerToTest.getSale().getRunningTotal();
+        double result = sale.getRunningTotal();
         assertEquals(expResult, result, "Different running total values in addToRunningTotal, oh no!");
 
     }
    
     
-    @Test
-    public void testGetRunningTotal() {
-        double expResult = 119.98;
-        Item item = controllerToTest.scanItem(123, 2);
-         
-        double result = controllerToTest.getSale().getRunningTotal();
-                
-        assertEquals(expResult, result, "Different running total values in getRunningTotal, oh no!");
-        
-    }
-
-    /*
-        @Test
-        public void testGetReceipt() {
-        Sale instance = new Sale();
-        Receipt expResult = null;
-        Receipt result = instance.getReceipt();
-        assertEquals(expResult, result);
-    }
-    */
+   
     @Test
     public void testAddToTotalVAT() {
-        double expResult = 6.0;
-        Item item = controllerToTest.scanItem(321, 5);
+        double expResult = 179.97;
+        sale.addToTotalVat(item1.getPrice()*item1.getVAT()*item1.getQuantity());
          
-        double result = round(controllerToTest.getSale().getTotalVat()*100)/100;
+        double result = sale.getTotalVat();
                 
         assertEquals(expResult, result, "Different total VATs, oh no!");
         
